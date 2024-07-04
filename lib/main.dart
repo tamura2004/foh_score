@@ -223,16 +223,16 @@ class ScorePanel extends StatelessWidget {
       Positioned(
         left: 0,
         child: ScoreButton(
-          width: width,
-          height: height / 2,
+          width: width / 2,
+          height: height,
           onTap: onTapLeft,
         ),
       ),
       Positioned(
         right: 0,
         child: ScoreButton(
-          width: width,
-          height: height / 2,
+          width: width / 2,
+          height: height,
           onTap: onTapRight,
         ),
       ),
