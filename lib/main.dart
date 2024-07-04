@@ -73,9 +73,9 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   List<Player> players = [
-    Player(Colors.deepOrange.shade700),
-    Player(Colors.indigo.shade700),
-    Player(Colors.green.shade700),
+    Player(Colors.orange.shade400),
+    Player(Colors.blue.shade400),
+    Player(Colors.green.shade400),
   ];
   void incrementAbility(int i, Ability ability) {
     players[i].incrementAbility(ability);
@@ -140,30 +140,59 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ScoreButton extends StatelessWidget {
+enum Direction { left, right}
+
+class ScoreButton extends StatefulWidget {
   const ScoreButton({
     super.key,
     required this.width,
     required this.height,
     required this.onTap,
+    required this.direction,
   });
 
   final double width;
   final double height;
   final VoidCallback onTap;
+  final Direction direction;
 
+  @override
+  State<ScoreButton> createState() => _ScoreButtonState();
+}
+
+class _ScoreButtonState extends State<ScoreButton> {
+  double _opacity = 0.0;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
-      child: Opacity(
-        opacity: 0,
+      onTap: widget.onTap,
+      onTapDown: (_) {
+        setState(() {
+          _opacity = 0.4;
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          _opacity = 0.0;
+        });
+      },
+      child: AnimatedOpacity(
+        duration: Duration(milliseconds: 10),
+        opacity: _opacity,
         child: Container(
-          width: width,
-          height: height,
+          width: widget.width,
+          height: widget.height,
           decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
+            color: Colors.black,
+            borderRadius: widget.direction == Direction.left ?
+              BorderRadius.only(
+                topLeft: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ) :
+              BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              )
           ),
         ),
       ),
@@ -226,6 +255,7 @@ class ScorePanel extends StatelessWidget {
           width: width / 2,
           height: height,
           onTap: onTapLeft,
+          direction: Direction.left,
         ),
       ),
       Positioned(
@@ -234,6 +264,7 @@ class ScorePanel extends StatelessWidget {
           width: width / 2,
           height: height,
           onTap: onTapRight,
+          direction: Direction.right,
         ),
       ),
     ]);
