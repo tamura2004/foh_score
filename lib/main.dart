@@ -98,11 +98,12 @@ class MyHomePage extends StatelessWidget {
 
     var appState = context.watch<MyAppState>();
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Wrap(
           direction: Axis.horizontal,
-          spacing: 24,
-          runSpacing: 24,
+          spacing: 12,
+          runSpacing: 12,
           children: <Widget>[
             for (int i = 0; i < appState.players.length; i++) ...{
               Wrap(
@@ -245,7 +246,7 @@ class ScorePanel extends StatelessWidget {
         left: 10,
         child: Icon(
           icon,
-          color: Colors.grey.shade300,
+          color: Colors.white,
           size: 24,
         ),
       ),
