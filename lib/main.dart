@@ -73,9 +73,11 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   List<Player> players = [
-    Player(Colors.orange.shade400),
+    Player(Colors.orange.shade600),
     Player(Colors.blue.shade400),
     Player(Colors.green.shade400),
+    Player(Colors.red.shade400),
+    Player(Colors.yellow.shade700),
   ];
   void incrementAbility(int i, Ability ability) {
     players[i].incrementAbility(ability);
@@ -94,7 +96,7 @@ class MyHomePage extends StatelessWidget {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double deviceWidth = MediaQuery.of(context).size.width;
     final height = (deviceHeight - 8 * 9 - 32) / 9.5;
-    final width = (deviceWidth - 24 * 4) / 3;
+    final width = (deviceWidth - 24 * 6) / 5;
 
     var appState = context.watch<MyAppState>();
     return Scaffold(
@@ -224,7 +226,7 @@ class ScorePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium!.copyWith(
+    final style = theme.textTheme.displayLarge!.copyWith(
       color: theme.colorScheme.onPrimary,
     );
     return Stack(alignment: Alignment.center, children: [
